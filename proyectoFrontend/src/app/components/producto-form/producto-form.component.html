@@ -1,0 +1,63 @@
+<div id="formulario" class="container m-3 mb-5">
+    <div class="mb-4 mx-auto" style="max-width: 500px;">
+        <h1>Alta de producto</h1>
+    </div>
+    <form (ngSubmit)="registrarProducto()" #formContact="ngForm" class="p-4 border rounded mx-auto" style="max-width: 500px;">
+        <div class="form-group mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" name="nombre" class="form-control" placeholder="Nombre"
+            [(ngModel)]="producto.nombre" required #nombre="ngModel">
+
+            <div class="p-2 alert alert-danger mt-2" style="font-size: 0.8rem;" [hidden]="nombre.valid || nombre.pristine">
+                El nombre es obligatorio
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripcion</label>
+            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" 
+            [(ngModel)]="producto.descripcion" required #descripcion="ngModel">
+
+            <div class="p-2 alert alert-danger mt-2" style="font-size: 0.8rem;" [hidden]="descripcion.valid || descripcion.pristine">
+                La descripcion es obligatoria
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="imagen" class="form-label">Imagen</label>
+            <input type="text" class="form-control" id="imagen" name="imagen" placeholder="Imagen" 
+            required #imagen="ngModel"
+            [(ngModel)]="producto.imagen">
+
+            <div  class="p-2 alert alert-danger mt-2" style="font-size: 0.8rem;" [hidden]="imagen.valid || imagen.pristine">
+                La imagen es obligatoria
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="stock" class="form-label">Precio</label>
+            <input type="number" class="form-control" id="precio" name="precio" placeholder="Precio" 
+            required #precio="ngModel" [(ngModel)]="producto.precio">
+
+            <div  class="p-2 alert alert-danger mt-2" style="font-size: 0.8rem;" [hidden]="precio.valid || precio.pristine">
+                El precio es obligatorio
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="stock" class="form-label">Stock</label>
+            <input type="number" class="form-control" id="stock" name="stock" placeholder="Stock" 
+            required #stock="ngModel"
+            [(ngModel)]="producto.stock">
+
+            <div  class="p-2 alert alert-danger mt-2" style="font-size: 0.8rem;" [hidden]="stock.valid || stock.pristine">
+                El stock es obligatorio
+            </div>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="destacado" required
+            [(ngModel)]="producto.destacado"
+            [ngModelOptions]="{standalone: true}">
+            <label class="form-check-label" for="destacado">Destacado</label>
+        </div>
+        <button class="btn btn-primary w-100" [disabled]="formContact.invalid">
+            Registrar
+        </button>
+    </form>
+</div>

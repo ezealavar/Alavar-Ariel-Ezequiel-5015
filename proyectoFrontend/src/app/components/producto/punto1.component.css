@@ -1,0 +1,10 @@
+#productos {
+    padding-top: 30px;
+    padding-bottom: 70px;
+}
+
+.card-img-top {
+    width: 100%; /* Esto hará que la imagen tome el 100% del ancho de su contenedor padre */
+    height: 250px; /* Puedes ajustar este valor a tus necesidades */
+    object-fit: cover; /* Esto hará que la imagen cubra el espacio disponible sin distorsionarse */
+}

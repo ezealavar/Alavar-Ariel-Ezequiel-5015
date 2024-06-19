@@ -1,0 +1,57 @@
+<div id="formulario" class="container">
+    <div class="mb-4 mx-auto" style="max-width: 500px;">
+        <h1>Registro de tickets</h1>
+    </div>
+    <form #miform="ngForm" class="p-4 border rounded mx-auto" style="max-width: 500px;">
+        <div class="mb-3">
+            <label for="precioReal" class="form-label">Precio real</label>
+            <input type="number" class="form-control" id="precioReal" name="precioReal" placeholder="Precio real" required
+            [(ngModel)]="ticket.precioReal" (ngModelChange)="calcularPrecioCobrado()" required [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="mb-3">
+            <select id="tipoEspectador" class="form-select" (change)="calcularPrecioCobrado()" [(ngModel)]="ticket.espectador"
+            [ngModelOptions]="{standalone: true}" required>
+                <option value="" disabled selected>Seleccione espectador</option>
+                <option [ngValue]="espectador" *ngFor="let espectador of espectadores">{{ espectador.apellido }}, {{ espectador.nombre }}</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <select id="tipoEspectador" class="form-select" (change)="calcularPrecioCobrado()" [(ngModel)]="ticket.categoria"
+            [ngModelOptions]="{standalone: true}" required>
+                <option value="" disabled selected>Seleccione Tipo Espectador</option>
+                <!-- <option value="Premium">Premium</option>
+                <option value="Gold">Gold</option> -->
+                <option [ngValue]="categoria" *ngFor="let categoria of categorias">{{ categoria.nombre }} </option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <select id="tipoEspectador" class="form-select" (change)="calcularPrecioCobrado()" [(ngModel)]="ticket.categoriaEspectador"
+            [ngModelOptions]="{standalone: true}" required>
+                <option value="" disabled selected>Seleccione Tipo Espectador</option>
+                <option value="e">Extranjero</option>
+                <option value="l">Local</option>
+                <!-- <option [ngValue]="categoria" *ngFor="let categoria of categorias">{{ categoria.nombre }} </option> -->
+            </select>
+        </div>
+        
+        <div class="mb-3" *ngIf="ticket.categoriaEspectador == 'l' && ticket.precioReal > 0">
+            <label for="precioCobrado" class="form-label">Precio cobrado</label>
+            <input type="text" class="form-control" id="precioCobrado" name="precioCobrado" placeholder="Precio cobrado" required
+            [(ngModel)]="ticket.precioCobrado" [ngModelOptions]="{standalone: true}">
+        </div>
+        @if(accion == 'new') {
+            <div class="mb-3">
+                <button type="button" class="btn btn-primary w-100"(click)="registrarTicket()" >Registrar</button>
+            </div>
+        }
+        @else {
+        <div class="mb-3">
+            <button type="button" class="btn btn-primary w-100" (click)="modificarTicket()">Actualizar</button>
+        </div>
+        }
+        <div class="mb-3">
+            <button type="button" (click)="verListado()" class="btn btn-secondary w-100">Ver listado</button>
+        </div>
+    </form>
+</div>

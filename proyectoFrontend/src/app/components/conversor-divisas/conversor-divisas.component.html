@@ -1,0 +1,54 @@
+<div id="formulario" class="container m-3 mb-5">
+    <div class="text-center mb-4 mx-auto" style="max-width: 500px;">
+        <h1>Conversor de divisas</h1>
+    </div>
+    <form (ngSubmit)="registrarTransaccion()" #formContact="ngForm" class="p-4 border rounded mx-auto" style="max-width: 500px;">
+        <div>
+            <label for="number" class="form-label">Cantidad</label>
+            <input type="number" class="form-control" placeholder="Cantidad"
+            [(ngModel)]="transaccion.cantidadOrigen" name="cantidadOrigen" 
+            required #cantidad="ngModel">
+        </div>
+        <div class="mb-3">
+            <label for="disabledSelect" class="form-label">De</label>
+            <select id="disabledSelect" class="form-select" [(ngModel)]="transaccion.monedaOrigen" 
+            name="monedaOrigen">
+                <option value="ARS">ARS - Peso argentino</option>
+                <option value="BRL">BRL - Real brasileño</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="USD">USD - Dólar estadounidense</option>
+                <option value="GBP">GBP - Libra esterlina</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="disabledSelect" class="form-label">A</label>
+            <select id="disabledSelect" class="form-select" [(ngModel)]="transaccion.monedaDestino"
+            name="monedaDestino">
+                <option value="ARS">ARS - Peso argentino</option>
+                <option value="BRL">BRL - Real brasileño</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="USD">USD - Dólar estadounidense</option>
+                <option value="GBP">GBP - Libra esterlina</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" placeholder="Email"
+            [(ngModel)]="transaccion.emailCliente" required #email="ngModel"
+            name="email"
+            >
+        </div>
+        <!-- <div class="mb-3">
+            <label for="tasaConversion" class="form-label">Tasa de conversión</label>
+            <input type="number" class="form-control" placeholder="Tasa de Conversión"
+            [(ngModel)]="transaccion.tasaConversion" required 
+            #tasaConversion="ngModel" name="tasaConversion">
+        </div> -->
+        <div class="mb-3">
+            <button class="btn btn-primary btn-lg w-100" [disabled]="formContact.invalid">
+                Convertir
+            </button>
+        </div>
+        <a href="/conversor-lista">Ver lista de transacciones</a>
+    </form>
+</div>

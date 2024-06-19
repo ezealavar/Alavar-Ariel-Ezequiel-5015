@@ -1,0 +1,106 @@
+<div id="contenedor" class="container">
+    <div class="mb-4">
+        <h1>Listado Tickets</h1>
+    </div>
+    @if(tickets.length > 0) {
+    <table class="table border table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">DNI</th>
+                <th scope="col">Espectador</th>
+                <th scope="col">Tipo de espectador</th>
+                <th scope="col">Precio real</th>
+                <th scope="col">Precio cobrado</th>
+                <th scope="col">Fecha de cobro</th>
+                <th scope="col" class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let ticket of tickets">
+            <tr>
+                <th scope="row"></th>
+                <td>{{ ticket.espectador.dni }}</td>
+                <td>{{ ticket.espectador.apellido }}, {{ ticket.espectador.nombre }}</td>
+                <td>{{ ticket.categoria.nombre  }}</td>
+                <td>{{ ticket.precioReal | currency }}</td>
+                <td>{{ ticket.precioCobrado | currency }}</td>
+                <td>{{ ticket.fechaCobro | date: 'dd/MM/yyyy' }}</td>
+                <td>
+                    <div class="d-flex justify-content-around">
+                        <div>
+                            <button type="button" class="btn btn-warning"
+                            (click)="modificarTicket(ticket)"
+                            >Modificar</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-danger"
+                                (click)="eliminarTicket(ticket)">Eliminar</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <button type="button" class="btn btn-primary" (click)="registrarTicket()">Agregar ticket</button>
+        <button type="button" class="ms-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#categoriaModal">Filtrar tickets por categoria</button>
+        <button type="button" class="ms-2 btn btn-primary" (click)="obtenerTickets()">Mostrar todos los Tickets</button>
+    </div>
+    <div id="resumen">
+        <!-- <div class="mb-4">
+            <h1>Resumen de ventas</h1>
+        </div> -->
+        <!-- <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Resumen de Tickets</h5>
+                <p class="card-text">
+                    <strong>Total local:</strong> {{ obtenerTotalLocal() | currency }}<br>
+                    <strong>Cantidad local:</strong> {{ obtenerCantidadLocal() }}<br>
+                    <strong>Total extranjero:</strong> {{ obtenerTotalExtranjero() | currency }}<br>
+                    <strong>Cantidad extranjero:</strong> {{ obtenerCantidadExtranjero() }}<br>
+                    <strong>Total recaudado:</strong> {{ obtenerTotalRecaudado() | currency }}<br>
+                    <strong>Cantidad total:</strong> {{ obtenerCantidadTotal() }}
+                </p>
+            </div>
+        </div> -->
+    </div>
+    } @else {
+    <div id="alert">
+        <div class="alert alert-primary text-center" role="alert">
+            <h4 class="alert-heading">¡Atención!</h4>
+            <p>No se encontraron tickets para mostrar.</p>
+            <hr>
+            <p class="mb-0">
+                <a href="/ticket-form" class="alert-link">volver al fomulario</a>.
+            </p>
+            <p class="mb-0">
+                        <a class="alert-link" (click)="obtenerTickets()">Mostrar todos los Tickets</a>
+            </p>
+        </div>
+    </div>
+    }
+    <div class="modal" id="categoriaModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Seleccione Tipo Espectador</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <select id="categoria" class="form-select" [(ngModel)]="categoria"
+                        [ngModelOptions]="{standalone: true}">
+                            <option value="" disabled selected>Seleccione Tipo Espectador</option>
+                            <option value="Premium">Premium</option>
+                            <option value="Gold">Gold</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="obtenerTicketsPorCategoria(categoria)">Filtrar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

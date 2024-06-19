@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="d-flex flex-column align-items-center w-100">
+        <div class="col-lg-7">
+            <h1 class="text-center my-4">Lista de Transacciones</h1>
+            <div class="my-3 d-flex flex-sm-row flex-column justify-content-between">
+                <button class="btn btn-primary mb-2 px-3 me-4 " (click)="obtenerTransacciones()">
+                    Recuperar todas las transacciones
+                </button>
+                <div class="d-flex flex-sm-row flex-column">
+                    <button type="button" class="me-4 btn btn-primary mb-2" data-bs-toggle="modal"
+                        data-bs-target="#modalTransacciones">
+                        Filtrar por moneda
+                    </button>
+                    <button type="button" class="btn btn-primary mb-2" (click)="registrarTransaccion()">
+                        Registrar transacción
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-5">
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let transaccion of transacciones">
+                    <h5 class="mb-1">Transacción</h5>
+                    <p class="mb-1">Moneda Origen: {{ transaccion.monedaOrigen }}</p>
+                    <p class="mb-1">Cantidad Origen: {{ transaccion.cantidadOrigen }}</p>
+                    <p class="mb-1">Moneda Destino: {{ transaccion.monedaDestino }}</p>
+                    <p class="mb-1">Cantidad Destino: {{ transaccion.cantidadDestino }}</p>
+                    <p class="mb-1">Email Cliente: {{ transaccion.emailCliente }}</p>
+                    <p class="mb-1">Tasa de Conversión: {{ transaccion.tasaConversion }}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalTransacciones" tabindex="-1" aria-labelledby="modalTransaccionesLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTransaccionesLabel">Filtrar transacciones</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form #formContact="ngForm">
+                        <div class="mb-3">
+                            <label for="disabledSelect" class="form-label">De</label>
+                            <select id="disabledSelect" class="form-select" [(ngModel)]="transaccion.monedaOrigen"
+                                name="monedaOrigen">
+                                <option value="ARS-Argentina">ARS - Peso argentino</option>
+                                <option value="BRL-Brasil">BRL - Real brasileño</option>
+                                <option value="EUR-Europa">EUR - Euro</option>
+                                <option value="USD-EstadosUnidos">USD - Dólar estadounidense</option>
+                                <option value="GBP-GranBretaña">GBP - Libra esterlina</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="disabledSelect" class="form-label">A</label>
+                            <select id="disabledSelect" class="form-select" [(ngModel)]="transaccion.monedaDestino"
+                                name="monedaDestino">
+                                <option value="ARS-Argentina">ARS - Peso argentino</option>
+                                <option value="BRL-Brasil">BRL - Real brasileño</option>
+                                <option value="EUR-Europa">EUR - Euro</option>
+                                <option value="USD-EstadosUnidos">USD - Dólar estadounidense</option>
+                                <option value="GBP-GranBretaña">GBP - Libra esterlina</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary mb-4" (click)="obtenerTransaccionesPorDivisas()" data-bs-dismiss="modal">Recuperar por filtro</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

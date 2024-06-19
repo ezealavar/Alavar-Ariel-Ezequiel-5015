@@ -1,0 +1,61 @@
+<div id="productos" class="container">
+    <div class="p-2 d-flex">
+        <h1>Productos</h1>
+        <div class="p-2 align-content-center" style="text-align: right; width: 100%;">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                </svg>
+            </button>
+            <div class="modal fade" id="modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5>Carrito de Compras</h5>
+                        </div>
+                        <div class="modal-body">
+                            <h6 *ngIf="arrayCarrito.length === 0" class="text-center text-muted">El carrito está vacio</h6>
+                            <div class="d-flex py-2 border-bottom" *ngFor="let producto of arrayCarrito">
+                                <div class="p-3">
+                                    <img [src]="producto.imagen" class="card-img-top rounded" [alt]="producto.nombre" style="width: 100px; height: auto;" />
+                                </div>
+                                <div class="d-flex flex-column justify-content-between" style="width: 100%;">
+                                    <h6 class="text-center mb-2">{{ producto.nombre }}</h6>
+                                    <p class="text-center m-0 text-success">${{ producto.precio }}</p>
+                                    <div class="d-flex justify-content-center align-items-center mt-2">
+                                        <button (click)="disminuirStock(producto)" class="btn btn-outline-primary btn-sm">-
+                                        </button>
+                                        <p class="mx-3 my-0 text-center justify-content-center">{{ producto.stock }}</p>
+                                        <button (click)="aumentarStock(producto)" class="btn btn-outline-primary btn-sm">+
+                                        </button>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-footer d-flex">
+                            <h6 class="text-start w-50">Monto total: ${{ obtenerMontoTotal() }}</h6>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary">Check Out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 d-flex flex-wrap">
+        <div class="p-2 col-md-4 col-6" *ngFor="let producto of productos">
+            <div class="card">
+                <img [src]="producto.imagen" class="card-img-top p-2" [alt]="producto.nombre" />
+                <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre }}</h5>
+                    <p class="card-text">{{ producto.descripcion }}</p>
+                    <a (click)="agregarCarrito(producto)" class="btn btn-primary">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-2">
+        <button type="button" class="btn btn-lg btn-primary" (click)="registrar()">Registrar Producto</button>
+    </div>
+</div>
