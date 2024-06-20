@@ -1,5 +1,5 @@
 const Ticket = require('../models/ticket');
-const Categoria = require('../models/categoriaEspectador'); // Asegúrate de que esta ruta es correcta
+const Categoria = require('../models/categoriaEspectador');
 
 const ticketCtrl = {}
 
@@ -75,25 +75,5 @@ ticketCtrl.deleteTicket = async (req, res) => {
         })
     }
 }
-
-// ticketCtrl.getTicketsPorCategoriaNuevo = async (req, res) => {
-//     // Primero, encuentra la categoría por nombre
-//     const categoria = await Categoria.findOne({ nombre: req.params.nombre });
-
-//     if (!categoria) {
-//         return res.status(404).json({ message: 'Categoría no encontrada' });
-//     }
-
-//     // Luego, encuentra los tickets que pertenecen a esa categoría
-//     var tickets = await Ticket.find({ categoria: categoria._id }).populate("espectador").populate("categoria");
-
-//     res.status(200).json(tickets);
-// }
-
-// ticketCtrl.getTicketsPorCategoriaNuevo = async (req, res) => {
-//     var tickets = await Ticket.find({ categoria: req.params.categoria }).populate("espectador");
-
-//     res.status(200).json(tickets);
-// }
 
 module.exports = ticketCtrl;

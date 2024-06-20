@@ -1,7 +1,8 @@
 <div class="container">
+    <h1 class="text-center my-4">Lista de Transacciones</h1>
+    @if(transacciones.length > 0) {
     <div class="d-flex flex-column align-items-center w-100">
         <div class="col-lg-7">
-            <h1 class="text-center my-4">Lista de Transacciones</h1>
             <div class="my-3 d-flex flex-sm-row flex-column justify-content-between">
                 <button class="btn btn-primary mb-2 px-3 me-4 " (click)="obtenerTransacciones()">
                     Recuperar todas las transacciones
@@ -31,6 +32,21 @@
             </ul>
         </div>
     </div>
+    } @else {
+    <div id="alert">
+        <div class="alert alert-primary text-center" role="alert">
+            <h4 class="alert-heading">¡Atención!</h4>
+            <p>No se encontraron tickets para mostrar.</p>
+            <hr>
+            <p class="mb-0">
+                <a href="/conversor" class="alert-link">volver al fomulario</a>.
+            </p>
+            <p class="mb-0">
+                        <a class="alert-link" (click)="obtenerTransacciones()">Mostrar todas las Transacciones</a>
+            </p>
+        </div>
+    </div>
+    }
 
     <div class="modal fade" id="modalTransacciones" tabindex="-1" aria-labelledby="modalTransaccionesLabel"
         aria-hidden="true">
